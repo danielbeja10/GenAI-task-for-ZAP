@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title> GenAI Task for ZAP</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header>
+    <h1>GenAI Task for ZAP</h1>
+    <p>Designed By Daniel Beja | april 2026</p>
+  </header>
+
+  <main>
+
+    <!-- Left panel: input -->
+    <section class="panel left-panel">
+
+      <div class="panel-header">
+        <h2>Input</h2>
+        <div class="panel-header-actions">
+          <div class="test-selector">
+            <label for="testSelect">Load test:</label>
+            <select id="testSelect">
+              <option value="">— custom —</option>
+            </select>
+          </div>
+          <label class="file-upload-btn" title="Load a .txt file into the input">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+            Load .txt
+            <input type="file" id="fileInput" accept=".txt" />
+          </label>
+        </div>
+      </div>
+
+      <textarea
+        id="input"
+        placeholder="Paste your product list here — any format works (newlines, commas, semicolons, Hebrew, English…)"
+        spellcheck="false"
+      ></textarea>
+
+      <!-- Prompt editor — hidden by default, toggled by the button below -->
+      <div id="promptEditor" class="prompt-editor hidden">
+        <div class="prompt-editor-header">
+          <span>System Prompt</span>
+          <button id="resetPrompt" class="prompt-reset-btn">Reset to default</button>
+        </div>
+        <textarea id="promptText" spellcheck="false"></textarea>
+      </div>
+
+      <!-- Row 1: API key + model -->
+      <div class="controls-row">
+        <input
+          type="password"
+          id="apiKey"
+          placeholder="Gemini API key"
+          autocomplete="off"
+          spellcheck="false"
+        />
+        <input
+          type="text"
+          id="modelSelect"
+          value="gemini-2.5-flash"
+          title="Default: gemini-2.5-flash. Override with any Gemini model ID."
+          spellcheck="false"
+        />
+      </div>
+
+      <!-- Row 2: Prompt toggle + Run -->
+      <div class="controls-row controls-actions">
+        <button id="togglePrompt" title="View or edit the prompt sent to the AI">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Prompt
+        </button>
+        <div class="controls-run">
+          <div id="spinner" class="spinner hidden"></div>
+          <button id="run">Run &#9654;</button>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Right panel: results -->
+    <section class="panel right-panel">
+      <div class="panel-header">
+        <h2>Results</h2>
+        <span id="badge" class="badge hidden"></span>
+      </div>
+
+      <div id="results">
+        <p class="empty-state">Results will appear here after you click Run.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="prompt.js"></script>
+  <script src="test-cases.js"></script>
+  <script src="local.js"></script><!-- gitignored — pre-fills API key for local dev -->
+  <script src="main.js"></script>
+</body>
+</html>
