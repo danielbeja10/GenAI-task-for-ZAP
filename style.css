@@ -1,27 +1,28 @@
 /* ── Reset ── */
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* ── Design tokens ── */
+/* ── Design tokens — ZAP palette ── */
 :root {
-  --bg:          #f0f4fb;        /* off-white with a blue tint */
+  --navy:        #0d1b3e;        /* ZAP dark header */
+  --navy-2:      #1a2e5a;        /* slightly lighter navy */
+  --teal:        #00b4cc;        /* ZAP cyan-teal accent */
+  --teal-light:  #e6f8fb;
+  --teal-border: #b3e8f0;
+  --bg:          #f4f6fb;        /* off-white page background */
   --surface:     #ffffff;
-  --surface-2:   #f5f8ff;        /* right panel, inputs */
-  --border:      #dce4f5;        /* blue-gray borders */
-  --border-hover:#b8c9ed;
-  --text:        #1a2235;        /* dark navy text */
-  --text-muted:  #7e93b8;
+  --surface-2:   #f8faff;
+  --border:      #e2e8f4;
+  --text:        #0d1b3e;        /* navy text */
+  --text-muted:  #6b7ea8;
   --text-subtle: #a8bad8;
-  --accent:      #e8401c;        /* Zap orange — CTA only */
-  --accent-hover:#c93416;
-  --blue:        #4a6cf7;        /* AI-engine blue — secondary actions */
-  --blue-light:  #eef2fe;
-  --blue-border: #c0ccf8;
+  --accent:      #00b4cc;        /* CTA: teal */
+  --accent-dark: #0099ae;
   --green:       #16a34a;
   --red:         #dc2626;
   --radius:      10px;
   --radius-sm:   7px;
-  --shadow:      0 1px 4px rgba(74, 108, 247, 0.07);
-  --shadow-md:   0 4px 16px rgba(74, 108, 247, 0.1);
+  --shadow:      0 1px 4px rgba(13, 27, 62, 0.07);
+  --shadow-md:   0 4px 16px rgba(13, 27, 62, 0.12);
 }
 
 /* ── Base ── */
@@ -36,31 +37,30 @@ body {
 
 .hidden { display: none !important; }
 
-/* ── Header ── */
+/* ── Header — matches ZAP dark navy bar ── */
 header {
-  background: linear-gradient(135deg, rgba(14, 100, 220, 0.6) 0%, rgba(10, 80, 190, 0.65) 100%);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: var(--navy);
   color: #fff;
-  padding: 0.9rem 2rem;
+  padding: 0.85rem 2rem;
   display: flex;
   align-items: center;
   gap: 1rem;
   flex-shrink: 0;
-  box-shadow: 0 2px 8px rgba(14, 100, 220, 0.2);
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 8px rgba(13, 27, 62, 0.35);
 }
 
 header h1 {
   font-size: 1.4rem;
   font-weight: 700;
   letter-spacing: -0.01em;
+  color: #fff;
 }
 
 header p {
-  font-size: 0.8rem;
-  opacity: 0.85;
+  font-size: 0.82rem;
+  color: var(--teal);
   margin-left: auto;
+  font-weight: 500;
 }
 
 /* ── Split layout ── */
@@ -69,7 +69,6 @@ main {
   grid-template-columns: 1fr 1fr;
   flex: 1;
   overflow: hidden;
-  gap: 0;
 }
 
 .panel {
@@ -134,7 +133,7 @@ main {
 
 .test-selector select:focus {
   outline: none;
-  border-color: var(--blue);
+  border-color: var(--teal);
 }
 
 /* ── File upload button ── */
@@ -146,7 +145,7 @@ main {
   border: 1.5px solid var(--border);
   border-radius: var(--radius-sm);
   background: var(--surface);
-  color: var(--blue);
+  color: var(--navy-2);
   font-size: 0.78rem;
   font-weight: 600;
   cursor: pointer;
@@ -156,12 +155,12 @@ main {
 }
 
 .file-upload-btn:hover {
-  background: var(--blue-light);
-  border-color: var(--blue-border);
+  background: var(--teal-light);
+  border-color: var(--teal-border);
+  color: var(--accent-dark);
 }
 
 .file-upload-btn svg { flex-shrink: 0; }
-
 .file-upload-btn input[type="file"] { display: none; }
 
 /* ── Main textarea ── */
@@ -181,8 +180,8 @@ textarea {
 
 textarea:focus {
   outline: none;
-  border-color: var(--blue);
-  box-shadow: 0 0 0 3px rgba(74, 108, 247, 0.1);
+  border-color: var(--teal);
+  box-shadow: 0 0 0 3px rgba(0, 180, 204, 0.12);
   background: var(--surface);
 }
 
@@ -200,11 +199,11 @@ textarea:focus {
   align-items: center;
   justify-content: space-between;
   padding: 0.45rem 0.9rem;
-  background: var(--blue-light);
-  border-bottom: 1px solid var(--blue-border);
+  background: var(--teal-light);
+  border-bottom: 1px solid var(--teal-border);
   font-size: 0.7rem;
   font-weight: 700;
-  color: var(--blue);
+  color: var(--accent-dark);
   text-transform: uppercase;
   letter-spacing: 0.06em;
 }
@@ -213,7 +212,7 @@ textarea:focus {
   background: none;
   border: none;
   font-size: 0.72rem;
-  color: var(--blue);
+  color: var(--accent-dark);
   cursor: pointer;
   font-weight: 600;
   padding: 0;
@@ -240,7 +239,6 @@ textarea:focus {
 .prompt-editor textarea:focus {
   outline: none;
   box-shadow: none;
-  border-color: transparent;
 }
 
 /* ── Controls rows ── */
@@ -275,14 +273,14 @@ input[type="text"] {
 input[type="password"]:focus,
 input[type="text"]:focus {
   outline: none;
-  border-color: var(--blue);
-  box-shadow: 0 0 0 3px rgba(74, 108, 247, 0.1);
+  border-color: var(--teal);
+  box-shadow: 0 0 0 3px rgba(0, 180, 204, 0.12);
   background: var(--surface);
 }
 
 input::placeholder { color: var(--text-subtle); }
 
-#apiKey    { flex: 1; }
+#apiKey      { flex: 1; }
 #modelSelect { width: 175px; flex-shrink: 0; }
 
 /* ── Prompt toggle button ── */
@@ -303,14 +301,14 @@ button#togglePrompt {
 
 button#togglePrompt:hover,
 button#togglePrompt.active {
-  background: var(--blue-light);
-  color: var(--blue);
-  border-color: var(--blue-border);
+  background: var(--teal-light);
+  color: var(--accent-dark);
+  border-color: var(--teal-border);
 }
 
-/* ── Run button ── */
+/* ── Run button — ZAP teal ── */
 button#run {
-  background: linear-gradient(135deg, #4a6cf7, #3a56d4);
+  background: linear-gradient(135deg, #00b4cc, #0099ae);
   color: #fff;
   border: none;
   border-radius: var(--radius-sm);
@@ -319,7 +317,7 @@ button#run {
   font-weight: 700;
   cursor: pointer;
   transition: opacity 0.15s, transform 0.1s;
-  box-shadow: 0 2px 8px rgba(74, 108, 247, 0.35);
+  box-shadow: 0 2px 8px rgba(0, 180, 204, 0.35);
   letter-spacing: 0.01em;
 }
 
@@ -337,7 +335,7 @@ button#run:disabled {
   width: 20px;
   height: 20px;
   border: 2.5px solid var(--border);
-  border-top-color: var(--blue);
+  border-top-color: var(--teal);
   border-radius: 50%;
   animation: spin 0.65s linear infinite;
   flex-shrink: 0;
@@ -355,10 +353,14 @@ button#run:disabled {
   flex-direction: column;
   gap: 0.35rem;
   box-shadow: var(--shadow);
-  transition: box-shadow 0.15s;
+  transition: box-shadow 0.15s, border-color 0.15s;
 }
 
-.card:hover { box-shadow: var(--shadow-md); }
+.card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--teal-border);
+}
+
 .card + .card { margin-top: 0.65rem; }
 
 .card-name-row {
@@ -370,7 +372,7 @@ button#run:disabled {
 .card-name {
   font-size: 0.97rem;
   font-weight: 700;
-  color: var(--text);
+  color: var(--navy);
 }
 
 .card-check { font-size: 1rem; font-weight: 700; flex-shrink: 0; }
@@ -378,15 +380,38 @@ button#run:disabled {
 .card-check--fail { color: var(--red); }
 
 .card-inputs {
-  font-size: 0.76rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+  padding-top: 0.5rem;
+  margin-top: 0.15rem;
+  border-top: 1px solid var(--border);
+}
+
+.card-inputs-label {
+  font-size: 0.72rem;
+  color: var(--text-subtle);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-right: 0.1rem;
+}
+
+.card-input-tag {
+  display: inline-block;
+  background: var(--teal-light);
+  border: 1px solid var(--teal-border);
   color: var(--text-muted);
-  line-height: 1.5;
+  font-size: 0.74rem;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
 }
 
 .card-link {
   display: inline-block;
   margin-top: 0.3rem;
-  color: var(--accent);
+  color: var(--accent-dark);
   text-decoration: none;
   font-size: 0.85rem;
   font-weight: 600;
@@ -396,8 +421,8 @@ button#run:disabled {
 
 /* ── Badge ── */
 .badge {
-  background: var(--blue-light);
-  color: var(--blue);
+  background: var(--teal-light);
+  color: var(--accent-dark);
   font-size: 0.7rem;
   font-weight: 700;
   padding: 0.2rem 0.6rem;

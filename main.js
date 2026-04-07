@@ -168,7 +168,16 @@ function renderResults(items, expected = null) {
 
     const merged = document.createElement("div");
     merged.className = "card-inputs";
-    merged.textContent = `Merged from: ${item.inputs.join(" · ")}`;
+    const label = document.createElement("span");
+    label.className = "card-inputs-label";
+    label.textContent = "Merged from:";
+    merged.appendChild(label);
+    item.inputs.forEach(input => {
+      const tag = document.createElement("span");
+      tag.className = "card-input-tag";
+      tag.textContent = input;
+      merged.appendChild(tag);
+    });
 
     const link = document.createElement("a");
     link.className = "card-link";
