@@ -2,10 +2,13 @@
 
 ## About Me
 
-**Name: Daniel Beja**
-**Email: danielbeja10@gmail.com**
-**LinkedIn: https://www.linkedin.com/in/daniel-beja-a48831283/**
-**GitHub: https://github.com/danielbeja10**
+**Name:** Daniel Beja
+
+**Email:** danielbeja10@gmail.com
+
+**LinkedIn:** [daniel-beja-a48831283](https://www.linkedin.com/in/daniel-beja-a48831283/)
+
+**GitHub:** [danielbeja10](https://github.com/danielbeja10)
 
 ---
 
