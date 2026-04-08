@@ -2,10 +2,10 @@
 
 ## About Me
 
-**Name:**
-**Email:**
-**LinkedIn:**
-**GitHub:**
+**Name: Daniel Beja**
+**Email: danielbeja10@gmail.com**
+**LinkedIn: https://www.linkedin.com/in/daniel-beja-a48831283/**
+**GitHub: https://github.com/danielbeja10**
 
 ---
 
@@ -28,8 +28,10 @@
 - You can type any valid Gemini model ID to override it
 
 **Editing the prompt:**
-- Click **Prompt** to open the system prompt editor
-- Modify it freely - click **Reset to default** to restore the original at any time
+- The system prompt is always visible below the input area
+- Click **Edit Prompt** to enable editing — the prompt window turns amber to indicate edit mode
+- Click **Done Editing** to lock it back to read-only
+- Click **Reset to default** (visible in edit mode) to restore the original prompt at any time
 
 **Reading the results:**
 - Each card shows the canonical product name and the inputs that were merged into it
