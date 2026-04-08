@@ -14,6 +14,12 @@
 
 ## How to Run
 
+**Option 1 — Run instantly in the browser (no setup needed):**
+
+👉 [https://danielbeja10.github.io/GenAI-task-for-ZAP/](https://danielbeja10.github.io/GenAI-task-for-ZAP/)
+
+**Option 2 — Run locally:**
+
 1. Clone or download the repository
 2. Open `index.html` in any modern browser - no server, no install, no build step needed
 3. Enter your [Gemini API key](https://aistudio.google.com/apikey) in the API key field
