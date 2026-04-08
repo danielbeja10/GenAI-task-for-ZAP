@@ -197,12 +197,15 @@ function renderResults(items, expected = null) {
   updateBadge(items.length);
 
   if (expected) {
-    const legend = document.createElement("div");
-    legend.className = "test-legend";
-    legend.innerHTML =
-      '<span class="legend-pass">&#10003; Matched expected output</span>' +
-      '<span class="legend-fail">&#10007; Did not match expected output</span>';
-    resultsEl.appendChild(legend);
+    const banner = document.createElement("div");
+    banner.className = "test-banner";
+    banner.innerHTML =
+      '<div class="test-banner-title">&#128203; Test mode — comparing against expected answers</div>' +
+      '<div class="test-banner-legend">' +
+        '<span class="legend-pass">&#10003; Matched expected answer</span>' +
+        '<span class="legend-fail">&#10007; Did not match expected answer</span>' +
+      '</div>';
+    resultsEl.appendChild(banner);
   }
 
   items.forEach(item => {

@@ -1,7 +1,6 @@
 /* ── Reset ── */
 * { box-sizing: border-box; margin: 0; padding: 0; }
-input, button, select { font-family: inherit; }
-textarea { font-family: "Menlo", "Consolas", monospace; }
+input, button, select, textarea { font-family: inherit; }
 
 /* ── Design tokens — ZAP palette ── */
 :root {
@@ -398,17 +397,29 @@ button#run:disabled {
 
 @keyframes spin { to { transform: rotate(360deg); } }
 
-/* ── Test legend ── */
-.test-legend {
+/* ── Test banner ── */
+.test-banner {
+  background: #fffbe6;
+  border: 1.5px solid #f5cc5a;
+  border-radius: var(--radius);
+  padding: 0.7rem 1rem;
+  margin-bottom: 0.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.test-banner-title {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #7a5200;
+}
+
+.test-banner-legend {
   display: flex;
   gap: 1.2rem;
-  font-size: 0.75rem;
+  font-size: 0.78rem;
   font-weight: 600;
-  padding: 0.4rem 0.7rem;
-  background: var(--surface);
-  border: 1.5px solid var(--border);
-  border-radius: var(--radius-sm);
-  margin-bottom: 0.25rem;
 }
 
 .legend-pass { color: var(--green); }
