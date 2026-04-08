@@ -16,10 +16,42 @@ const resetPromptBtn = document.getElementById("resetPrompt");
 // Pre-fill the prompt editor with the default prompt.
 promptTextEl.value = SYSTEM_PROMPT;
 
-// Toggle the prompt editor open/closed.
+// ── Prompt resize handle ─────────────────────────────────────────────────────
+const resizeHandleEl = document.getElementById("promptResizeHandle");
+let resizing = false;
+let resizeStartY = 0;
+let resizeStartHeight = 0;
+
+resizeHandleEl.addEventListener("mousedown", (e) => {
+  resizing = true;
+  resizeStartY = e.clientY;
+  resizeStartHeight = promptTextEl.offsetHeight;
+  resizeHandleEl.classList.add("dragging");
+  e.preventDefault();
+});
+
+document.addEventListener("mousemove", (e) => {
+  if (!resizing) return;
+  const delta = resizeStartY - e.clientY; // drag up → bigger prompt
+  const newHeight = Math.max(80, Math.min(600, resizeStartHeight + delta));
+  promptTextEl.style.height = newHeight + "px";
+});
+
+document.addEventListener("mouseup", () => {
+  if (resizing) {
+    resizing = false;
+    resizeHandleEl.classList.remove("dragging");
+  }
+});
+
+// Toggle the prompt editor between read-only and editable.
 togglePromptBtn.addEventListener("click", () => {
-  const isHidden = promptEditorEl.classList.toggle("hidden");
-  togglePromptBtn.classList.toggle("active", !isHidden);
+  const isEditing = promptEditorEl.classList.toggle("editing");
+  promptTextEl.readOnly = !isEditing;
+  togglePromptBtn.classList.toggle("active", isEditing);
+  resetPromptBtn.classList.toggle("hidden", !isEditing);
+  togglePromptBtn.querySelector("span").textContent = isEditing ? "Done Editing" : "Edit Prompt";
+  if (isEditing) promptTextEl.focus();
 });
 
 // Reset the prompt textarea back to the original default.
@@ -139,6 +171,15 @@ function renderResults(items, expected = null) {
   }
 
   updateBadge(items.length);
+
+  if (expected) {
+    const legend = document.createElement("div");
+    legend.className = "test-legend";
+    legend.innerHTML =
+      '<span class="legend-pass">&#10003; Matched expected output</span>' +
+      '<span class="legend-fail">&#10007; Did not match expected output</span>';
+    resultsEl.appendChild(legend);
+  }
 
   items.forEach(item => {
     const card = document.createElement("div");
