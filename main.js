@@ -92,7 +92,10 @@ TEST_CASES.forEach((tc, i) => {
 // When a test is selected, load its input into the textarea.
 testSelectEl.addEventListener("change", () => {
   const idx = testSelectEl.value;
-  if (idx === "") return;
+  if (idx === "") {
+    inputEl.value = "";
+    return;
+  }
   if (idx === "demo") {
     inputEl.value = TEST_CASES[0].input;
     return;
@@ -100,9 +103,8 @@ testSelectEl.addEventListener("change", () => {
   inputEl.value = TEST_CASES[parseInt(idx)].input;
 });
 
-// Pre-load the first test case so the evaluator can click Run immediately.
-inputEl.value = TEST_CASES[0].input;
-testSelectEl.value = "0";
+// Start on custom (empty) by default.
+testSelectEl.value = "";
 
 // If local.js exists and defines DEV_API_KEY, pre-fill the key field (dev only).
 // On the reviewer's machine local.js doesn't exist, so this variable is undefined.
