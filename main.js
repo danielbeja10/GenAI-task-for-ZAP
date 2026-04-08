@@ -75,6 +75,13 @@ document.getElementById("fileInput").addEventListener("change", (e) => {
 
 // Populate the test selector dropdown from TEST_CASES and wire up loading.
 const testSelectEl = document.getElementById("testSelect");
+
+// Add the offline demo option first.
+const demoOpt = document.createElement("option");
+demoOpt.value = "demo";
+demoOpt.textContent = "Demo (offline — no API key needed)";
+testSelectEl.appendChild(demoOpt);
+
 TEST_CASES.forEach((tc, i) => {
   const opt = document.createElement("option");
   opt.value = i;
@@ -86,6 +93,10 @@ TEST_CASES.forEach((tc, i) => {
 testSelectEl.addEventListener("change", () => {
   const idx = testSelectEl.value;
   if (idx === "") return;
+  if (idx === "demo") {
+    inputEl.value = TEST_CASES[0].input;
+    return;
+  }
   inputEl.value = TEST_CASES[parseInt(idx)].input;
 });
 
@@ -105,17 +116,30 @@ runBtn.addEventListener("click", async () => {
   const key   = apiKeyEl.value.trim();
   const model = modelSelectEl.value;
 
-  if (!key) { clearResults(); renderError("Please enter your Gemini API key."); return; }
-  if (!raw)  return;
+  if (!raw) return;
 
   setLoading(true);
   clearResults();
 
+  const idx = testSelectEl.value;
+
   try {
-    const items = await deduplicate(raw, key, model, promptTextEl.value.trim() || SYSTEM_PROMPT);
+    let items;
+    if (idx === "demo") {
+      // Offline demo: pre-recorded response for test case 1 (Hebrew/English merges).
+      items = [
+        { canonical: "Apple AirPods Pro",   inputs: ["Apple AirPods Pro", "אפל אירפודס פרו"] },
+        { canonical: "Sony WH-1000XM5",     inputs: ["Sony WH-1000XM5", "סוני אוזניות ביטול רעש WH-1000XM5"] },
+        { canonical: "Dyson V15 Detect",    inputs: ["Dyson V15 Detect", "דייסון V15 דיטקט"] }
+      ];
+    } else {
+      if (!key) { clearResults(); renderError("Please enter your Gemini API key."); setLoading(false); return; }
+      items = await deduplicate(raw, key, model, promptTextEl.value.trim() || SYSTEM_PROMPT);
+    }
     // Pass expected answers only when a test case is active (not custom input).
-    const idx = testSelectEl.value;
-    const expected = idx !== "" ? TEST_CASES[parseInt(idx)].expected : null;
+    const expected = idx !== "" && idx !== "demo"
+      ? TEST_CASES[parseInt(idx)].expected
+      : idx === "demo" ? TEST_CASES[0].expected : null;
     renderResults(items, expected);
   } catch (err) {
     renderError(err.message);

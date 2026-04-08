@@ -34,7 +34,10 @@
 **Reading the results:**
 - Each card shows the canonical product name and the inputs that were merged into it
 - Click **View lowest price on Zap ↗** to open a live search on Zap's price-comparison engine
-- When running a built-in test case, a **✓** (green) or **✗** (red) marks whether the AI matched the expected answer
+- When running a built-in test case, each card shows a pass/fail indicator:
+  - **✓** (green) — the AI's output matched the expected canonical name for that product
+  - **✗** (red) — the AI returned a name that didn't match the expected answer
+  - These indicators only appear for the 5 built-in test cases, not for custom input
 
 ---
 
